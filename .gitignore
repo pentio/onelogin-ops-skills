@@ -1,0 +1,13 @@
+# 認証情報
+.env
+.env.*
+
+# Collectorの出力（実在するユーザー情報を含む）
+access_review_data*.json
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store

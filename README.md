@@ -1,6 +1,6 @@
 # onelogin-ops-skills
 
-OneLoginの運用・監査に役立つ生成AI向けSkill集です。[Obot](https://obot.ai/) などSkillに対応したAIエージェント基盤から読み込んで利用することを想定しています。
+OneLoginをご利用のお客様向けに、OneLoginの運用・監査に役立つ生成AI向けSkillを公開しています。
 
 ## 収録Skill
 
@@ -23,9 +23,9 @@ skills/
 
 ## 利用方法
 
-1. AIエージェント基盤（Obotなど）で、このリポジトリをSkillの取得元として登録します。
-2. 利用したいSkillを有効にします。
-3. Skillの指示に従い、OneLoginテナントとAPI Credentialを実行のたびに入力します。
+1. このリポジトリをダウンロードまたはクローンします。
+2. 利用したいSkillのディレクトリ（例：`skills/onelogin-access-review/`）を、お使いのAIツールのSkill読み込み先に配置します。Skill（`SKILL.md` 形式）に対応したAIツールで利用できます。
+3. Skillの案内に従い、OneLoginテナントとAPI Credentialを実行のたびに入力します。
 
 ### 動作要件
 

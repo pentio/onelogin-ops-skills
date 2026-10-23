@@ -50,6 +50,6 @@ python3 -m unittest -v
 
 ## 免責事項
 
-本リポジトリはOneLoginの提供元とは関係のない非公式のものです。OneLoginは各権利者の商標です。
+本リポジトリはOne Identity LLCが公式に提供するものではなく、同社の保証やサポートの対象外です。OneLoginはOne Identity LLCまたはその関連会社の商標です。
 
 Skillの出力は確認を支援するための情報であり、アクセス権の削除などの判断は必ず人が行ってください。

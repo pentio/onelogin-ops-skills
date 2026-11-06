@@ -13,40 +13,30 @@ OneLoginをご利用のお客様向けに、OneLoginの運用・監査に役立�
 ```text
 skills/
 └── <skill名>/
-    ├── SKILL.md        # Skill本体（名前・説明・手順）
-    ├── references/     # 必要なときだけ参照する補足資料
-    ├── scripts/        # Skillから実行するスクリプト
-    └── assets/         # アイコンなど
+    ├── README.md            # skillの説明
+    └── {skill名}.zip        # skill本体
 ```
 
-各Skillは `skills/<skill名>/SKILL.md` を起点とします。
+各Skillは `skills/<skill名>/<skill名>.zip` を起点とします。
 
 ## 利用方法
 
-1. このリポジトリをダウンロードまたはクローンします。
-2. 利用したいSkillのディレクトリ（例：`skills/onelogin-access-review/`）を、お使いのAIツールのSkill読み込み先に配置します。Skill（`SKILL.md` 形式）に対応したAIツールで利用できます。
-3. Skillの案内に従い、OneLoginテナントとAPI Credentialを実行のたびに入力します。
+1. 利用したいSkillのZIPをクリックし、［Download raw file］よりダウンロードします。
+2. チャットで登録済みのSkillを選択し、監査を依頼します。
+3. 以降の操作は、各SkillのREADMEとZIP内の `references/usage-guide.md` を参照してください。
 
 ### 動作要件
 
-- Python 3（同梱スクリプトは標準ライブラリのみを使用）
-- OneLogin API Credential（`onelogin-access-review` の通常の監査では **Read All** スコープ）
+- Skillを実行する環境でPython 3.10以上のコード実行、同梱ファイルへのアクセス、OneLogin APIへのHTTPS通信が可能であること（同梱スクリプトは標準ライブラリのみを使用）
+- OneLogin API Credential（必要なスコープは各skillによって異なる）
 
 ## セキュリティ
 
 - 同梱スクリプトは、明記している場合を除き読み取り専用です。
 - API CredentialやアクセストークンをSkillやリポジトリに保存しないでください。
-- 監査結果（`access_review_data.json` やCSV）には利用者の情報が含まれます。コミットしたり、公開の場所に置いたりしないでください。
 - 脆弱性の報告方法は [SECURITY.md](SECURITY.md) を参照してください。
 
-## 開発
 
-```bash
-cd skills/onelogin-access-review/scripts
-python3 -m unittest -v
-```
-
-テストやサンプルには架空の値（`example.com` など）だけを使用してください。
 
 ## 免責事項
 

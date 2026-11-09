@@ -13,17 +13,27 @@ OneLoginをご利用のお客様向けに、OneLoginの運用・監査に役立�
 ```text
 skills/
 └── <skill名>/
+    ├── SKILL.md             # skill本体（必須）
     ├── README.md            # skillの説明
-    └── {skill名}.zip        # skill本体
+    ├── scripts/             # 実行スクリプト
+    ├── references/          # 利用ガイドなどの参照資料
+    ├── assets/              # アイコンなどの静的ファイル
+    └── tests/               # テスト（配布ZIPには含めない）
 ```
 
-各Skillは `skills/<skill名>/<skill名>.zip` を起点とします。
+各Skillは `skills/<skill名>/` のフォルダ単位で管理しています。ソースコードはこのリポジトリで確認できます。
 
 ## 利用方法
 
-1. 利用したいSkillのZIPをクリックし、［Download raw file］よりダウンロードします。
-2. チャットで登録済みのSkillを選択し、監査を依頼します。
-3. 以降の操作は、各SkillのREADMEとZIP内の `references/usage-guide.md` を参照してください。
+1. 利用したいSkillの配布ZIP（`<skill名>.zip`）を、[Releases](../../releases) からダウンロードします。ZIPは、タグを付けたコミットから自動で生成しています。
+2. 同じ場所にある `<skill名>.zip.sha256` で、ダウンロードしたZIPが改ざんされていないことを確認します。
+
+    ```bash
+    shasum -a 256 -c <skill名>.zip.sha256
+    ```
+
+3. チャットで登録済みのSkillを選択し、監査を依頼します。
+4. 以降の操作は、各SkillのREADMEとZIP内の `references/usage-guide.md` を参照してください。
 
 ### 動作要件
 

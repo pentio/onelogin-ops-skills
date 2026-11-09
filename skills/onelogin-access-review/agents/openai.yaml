@@ -1,0 +1,13 @@
+interface:
+  display_name: OneLogin連携アプリのアクセス権監査
+  short_description: OneLogin連携アプリの割り当て・利用履歴からアクセス権を監査します
+  default_prompt: $onelogin-access-review を使ってOneLogin連携アプリのアクセス権監査を実施してください。
+  icon_small: assets/icon.jpeg
+  icon_large: assets/icon.jpeg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

@@ -1,0 +1,51 @@
+name: release
+
+# Skillの配布ZIPを、タグを付けたコミットから生成してReleaseに添付する。
+# タグ名は <skill名>-v<バージョン> とする（例: onelogin-access-review-v0.1.0）。
+on:
+  push:
+    tags:
+      - "*-v[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Releaseの作成に必要
+    steps:
+      - uses: actions/checkout@v5
+      - name: タグを検証する
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          if ! printf '%s' "$TAG" | grep -Eq '^[a-z0-9]+(-[a-z0-9]+)*-v[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::タグ名は <skill名>-v<x.y.z> の形式にしてください: $TAG"
+            exit 1
+          fi
+          skill="${TAG%-v*}"
+          if [ ! -f "skills/$skill/SKILL.md" ]; then
+            echo "::error::skills/$skill/SKILL.md が見つかりません"
+            exit 1
+          fi
+          echo "SKILL=$skill" >> "$GITHUB_ENV"
+      - name: テストを実行する
+        working-directory: skills/${{ env.SKILL }}
+        run: python3 -m unittest discover -s tests -v
+      - name: 配布ZIPとSHA-256を生成する
+        run: |
+          mkdir -p dist
+          (cd skills && zip -X -D -r "../dist/${SKILL}.zip" "$SKILL" \
+            -x "*/tests/*" -x "*/__pycache__/*" -x "*.pyc" -x "*/.DS_Store")
+          (cd dist && sha256sum "${SKILL}.zip" > "${SKILL}.zip.sha256")
+          cat "dist/${SKILL}.zip.sha256"
+          unzip -l "dist/${SKILL}.zip"
+      - name: Releaseを作成する
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" "dist/${SKILL}.zip" "dist/${SKILL}.zip.sha256" \
+            --title "$TAG" --generate-notes
